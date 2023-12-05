@@ -125,8 +125,7 @@ if st.button("Get PoE"):
         #df_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
        
         # Define your new column names
-        new_column_names = ['REV', 'TAG', 'SERVICE', 'PARENT TAG NUMBER', 'REQUISITION NUMBER', 
-                    'REQUISITION DESIGNATION', 'MATERIAL CODE']
+        new_column_names = ['REV', 'TAG', 'SERVICE', 'PARENT TAG NUMBER', 'REQUISITION NUMBER', 'REQUISITION DESIGNATION', 'MATERIAL CODE']
         
         st.write("Column names in the DataFrame:", df_EqList.columns.tolist())
         
