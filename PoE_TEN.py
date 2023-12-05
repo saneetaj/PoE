@@ -152,7 +152,7 @@ if st.button("Get PoE"):
             PoE_Total += count
         PoE_Total=math.ceil(PoE_Total)
                 
-        st.write(f"Total Equipment/ Line Items (not POE):\n {EqList_Total}, **Total PoE**: {PoE_Total}")
+        st.write(f"**Total PoE**: {PoE_Total}")
 
 # In[ ]:
 
