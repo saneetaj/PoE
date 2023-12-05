@@ -103,7 +103,7 @@ def PoE(dataframe):
                 item_counter[tag] += 0.5
                 item_indices[tag].append(index)
 
-
+    packaged_eq=['4046', '4119', '4171', '4133', '210', '0210', '0168', '168', '0180','180', '0275', '275']
     # Continue with the rest of the dataframe, skipping air cooler items
     for index, row in dataframe.iterrows():
         if index not in air_cooler_df.index:
@@ -115,7 +115,7 @@ def PoE(dataframe):
                     increment = 3
                 elif row['MATERIALCODE'] == '0140' or '140' and 'thermal oxidizer' in row['REQUISITIONDESIGNATION'].lower():
                     increment = 3
-                elif row['MATERIALCODE'] in ['4046', '4119', '4171', '4133', '210', '0210', '0168', '168', '0180','180', '0275', '275']:
+                elif row['MATERIALCODE'] in packaged_eq:
                     increment = 1.2
                 elif row['MATERIALCODE'] == '4064' and any(term in row['REQUISITIONDESIGNATION'].lower() for term in ['hoist', 'crane']):
                     increment = 0
