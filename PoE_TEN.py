@@ -119,7 +119,11 @@ if st.button("Get PoE"):
     # Load data from the uploaded file
     if uploaded_files is not None:
         EqList = pd.ExcelFile(uploaded_files)
-        df_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
+        
+        sheet_name = st.selectbox("Select the worksheet", EqList.sheet_names)
+        df_EqList = pd.read_excel(EqList, sheet_name)
+
+        #df_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
 
         #Drop NaN 
         df_EqList.dropna(subset=['TAG'], inplace=True)
