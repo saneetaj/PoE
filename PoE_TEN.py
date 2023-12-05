@@ -55,7 +55,7 @@ def PoE(dataframe):
         dataframe['REQUISITIONDESIGNATION'].str.lower().str.contains('air cooler|aircooler|air-cooled|air cooled')
     )
     air_cooler_df = dataframe[air_cooler_conditions]
-    st.write(f"Air Coolers:{air_cooler_df}")
+    st.write(f"Air Coolers:{air_cooler_df['TAG']}")
     # Apply count_items to the subset
     air_cooler_counter, air_cooler_indices = count_items(air_cooler_df)
 
