@@ -1,0 +1,4 @@
+
+streamlit
+tenacity
+openpyxl
