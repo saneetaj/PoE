@@ -16,22 +16,14 @@
 #!pip install -q streamlit
 #!pip install streamlit --q
 
-pip install openpyxl
 import streamlit as st
 import pandas as pd
 import warnings
 import re
 import math
+import openpyxl
 from collections import defaultdict
 warnings.filterwarnings('ignore')
-
-
-# In[25]:
-
-
-from openpyxl import load_workbook
-#from google.colab import drive
-#drive.mount('/content/drive', force_remount=True)
 
 from openpyxl import load_workbook
 
