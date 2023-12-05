@@ -22,12 +22,10 @@ def count_items(dataframe):
     pattern2 = r'([A-Za-z]+-[A-Za-z]+\d+)'
     pattern3 = r'([A-Za-z-]+\d+(-\d+)?)'
         
-    tag_str = str(row) if row is not None else ''
-
     for index, row in enumerate(dataframe['TAG']):
-        match1 = re.search(pattern1, tag_str)
-        match2 = re.search(pattern2, tag_str)
-        match3 = re.search(pattern3, tag_str)
+        match1 = re.search(pattern1, row)
+        match2 = re.search(pattern2, row)
+        match3 = re.search(pattern3, row)
 
         if match1:
             base_item1 = match1.group(0)
