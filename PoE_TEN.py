@@ -123,6 +123,7 @@ if st.button("Get PoE"):
     if uploaded_files is not None:
         df_EqList = pd.read_excel(EqList, sheet_name)
         #df_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
+        st.write("Column names in the DataFrame:", df_EqList.columns.tolist())
 
         #Drop NaN 
         df_EqList.dropna(subset=['TAG'], inplace=True)
