@@ -148,12 +148,12 @@ if st.button("Get PoE"):
     if uploaded_files is not None:
         EqList = pd.ExcelFile(uploaded_files)
         df_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
-            
-        #Drop the rows that are struck through
-        df_EqList.drop(strikethrough_rows, axis=0, inplace=True, errors='ignore')
-            
+        
         #remove spaces from column titles
         df_EqList.columns=[col.replace(" ","")for col in df_EqList.columns]
+        
+        #Drop the rows that are struck through
+        df_EqList.drop(strikethrough_rows, axis=0, inplace=True, errors='ignore')
             
         #remove NaN from PoE
         df_EqList.dropna(subset=['PoE'], inplace=True)
