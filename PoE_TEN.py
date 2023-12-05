@@ -129,7 +129,9 @@ if st.button("Get PoE"):
             
         #after converting the number in MaterialCode to string a decimal/period is added to the string. Remove that decimal/period.
         df_EqList['MATERIALCODE'] = df_EqList['MATERIALCODE'].astype(str).apply(lambda x: x.split('.')[0])
-    
+
+        df_EqList['REQUISITIONDESIGNATION'] = str(df_EqList['REQUISITIONDESIGNATION'])
+        
         line_counts, line_indices = count_items(df_EqList)
         EqList_Total = 0
         # Printing the counts and indices
