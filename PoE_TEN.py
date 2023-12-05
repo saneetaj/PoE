@@ -111,7 +111,6 @@ st.sidebar.info(
 uploaded_files = st.file_uploader('Upload your files',accept_multiple_files=False, type=['xslx', 'xlsm', 'xls','csv'])
 
 if st.button("Get PoE"):
-    strikethrough_rows = get_strikethrough_rows_in_column(uploaded_files, 'EQUIPMENT LIST','TAG')
 
     # Ensure df_EqList is a DataFrame
     if 'df_EqList' not in locals() or not isinstance(df_EqList, pd.DataFrame):
