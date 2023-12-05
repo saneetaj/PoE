@@ -55,7 +55,6 @@ def PoE(dataframe):
         dataframe['REQUISITIONDESIGNATION'].str.lower().str.contains('air cooler|aircooler|air-cooled|air cooled')
     )
     air_cooler_df = dataframe[air_cooler_conditions]
-    #st.write(f"Air Coolers:{air_cooler_df['TAG']}")
     # Apply count_items to the subset
     air_cooler_counter, air_cooler_indices = count_items(air_cooler_df)
 
@@ -144,7 +143,7 @@ if st.button("Get PoE"):
         PoE_Total = 0
         # Printing the counts and indices
         for item, count in POE_counts.items():
-            st.write(f"{item}: {count}")
+            #st.write(f"{item}: {count}")
             PoE_Total += count
         PoE_Total=math.ceil(PoE_Total)
                 
