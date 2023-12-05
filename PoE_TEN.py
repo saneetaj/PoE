@@ -182,11 +182,11 @@ if st.button("Get PoE"):
                 
                 st.write(f"Total Equipment/ Line Items (not POE):\n {EqList_Total}, **Total PoE**: {PoE_Total}")
             else:
-                print("read_EqList is not a DataFrame.")
+                st.write("read_EqList is not a DataFrame.")
         except Exception as e:
-            print(f"An error occurred: {e}")
+            st.write(f"An error occurred: {e}")
     else:
-        print("No file uploaded.")
+        st.write("No file uploaded.")
 
     #df_EqList = pd.DataFrame()
     #EqList=pd.ExcelFile(uploaded_files)
