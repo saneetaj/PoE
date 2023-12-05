@@ -107,11 +107,11 @@ st.sidebar.header("Instructions")
 st.sidebar.info(
     '''Upload a **EQUIPMENT LIST** to find the Pieces of Equipment. ***Make sure you delete any empty rows above the column titles, and any tags that are struck out.***'''
     )
-uploaded_files = st.file_uploader('Upload your files',accept_multiple_files=False, type=['xslx', 'xlsm', 'xls','csv'])
+uploaded_files = st.file_uploader('Upload the Equipment List Excel File',accept_multiple_files=False, type=['xslx', 'xlsm', 'xls','csv'])
 
 if uploaded_files is not None:
     EqList = pd.ExcelFile(uploaded_files)  
-    sheet_name = st.selectbox("Select the worksheet", EqList.sheet_names)
+    sheet_name = st.selectbox("Select the Equipment List Sheet", EqList.sheet_names)
 
 if st.button("Get PoE"):
 
