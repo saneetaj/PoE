@@ -192,11 +192,16 @@ if st.button("Get PoE"):
     else:
         st.write("No file uploaded.")
 
-    #df_EqList = pd.DataFrame()
-    #EqList=pd.ExcelFile(uploaded_files)
-    #read_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
-    #df_EqList = df_EqList.append(read_EqList)
-    
+    # Create a simple test DataFrame
+    df1 = pd.DataFrame({'col1': [1, 2, 3]})
+    df2 = pd.DataFrame({'col1': [4, 5, 6]})
+
+    # Try to append df2 to df1
+    try:
+        df1 = df1.append(df2, ignore_index=True)
+        st.write(df1)
+    except AttributeError as e:
+        st.write(f"An error occurred: {e}")
 
 
 # In[ ]:
