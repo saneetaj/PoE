@@ -26,7 +26,7 @@ def get_strikethrough_rows_in_column(file_name, sheet_name, column_name):
             break
     struck_rows = set()
     if column_index is None:
-        continue 
+        return struck_rows
         #    raise ValueError(f"Column '{column_name}' not found.")
     else:
         for row in sheet.iter_rows(min_row=2):  # Assuming the first row is the header
