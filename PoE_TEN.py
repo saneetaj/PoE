@@ -126,6 +126,8 @@ if st.button("Get PoE"):
        
         # Define your new column names
         new_column_names = ['REV', 'TAG', 'SERVICE', 'PARENT TAG NUMBER', 'REQUISITION NUMBER', 'REQUISITION DESIGNATION', 'MATERIAL CODE']
+        # Rename the columns
+        df_EqList.columns = new_column_names
         
         st.write("Column names in the DataFrame:", df_EqList.columns.tolist())
         
