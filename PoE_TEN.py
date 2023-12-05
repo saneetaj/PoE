@@ -24,16 +24,15 @@ def get_strikethrough_rows_in_column(file_name, sheet_name, column_name):
         if column_name in col:
             column_index = i
             break
-
-    if column_index is None:
-        raise ValueError(f"Column '{column_name}' not found.")
-
     struck_rows = set()
-    for row in sheet.iter_rows(min_row=2):  # Assuming the first row is the header
-        cell = row[column_index]
-        if cell.font and cell.font.strikethrough:
-            struck_rows.add(cell.row - 1)  # Subtract 1 to match pandas 0-indexing
-
+    if column_index is None:
+        continue 
+        #    raise ValueError(f"Column '{column_name}' not found.")
+    else:
+        for row in sheet.iter_rows(min_row=2):  # Assuming the first row is the header
+            cell = row[column_index]
+            if cell.font and cell.font.strikethrough:
+                struck_rows.add(cell.row - 1)  # Subtract 1 to match pandas 0-indexing
     return struck_rows
 
 
