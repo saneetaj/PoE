@@ -12,32 +12,6 @@ import openpyxl
 from collections import defaultdict
 warnings.filterwarnings('ignore')
 
-from openpyxl import load_workbook
-#get the entries which have been struck out
-def get_strikethrough_rows_in_column(file_name, sheet_name, column_name):
-    workbook = load_workbook(filename=file_name, data_only=True)
-    sheet = workbook[sheet_name]
-
-    # Find the index of the column with the specified name
-    column_index = None
-    for i, col in enumerate(sheet.iter_rows(min_row=1, max_row=1, values_only=True)):
-        if column_name in col:
-            column_index = i
-            break
-    struck_rows = set()
-    if column_index is None:
-        return struck_rows
-        #    raise ValueError(f"Column '{column_name}' not found.")
-    else:
-        for row in sheet.iter_rows(min_row=2):  # Assuming the first row is the header
-            cell = row[column_index]
-            if cell.font and cell.font.strikethrough:
-                struck_rows.add(cell.row - 1)  # Subtract 1 to match pandas 0-indexing
-    return struck_rows
-
-
-# In[26]:
-
 
 #function to count total line items in the Equipment list
 def count_items(dataframe):
@@ -150,9 +124,6 @@ if st.button("Get PoE"):
         
         #remove spaces from column titles
         df_EqList.columns=[col.replace(" ","")for col in df_EqList.columns]
-        
-        #Drop the rows that are struck through
-        df_EqList.drop(strikethrough_rows, axis=0, inplace=True, errors='ignore')
             
         #after converting the number in MaterialCode to string a decimal/period is added to the string. Remove that decimal/period.
         df_EqList['MATERIALCODE'] = df_EqList['MATERIALCODE'].astype(str).apply(lambda x: x.split('.')[0])
