@@ -110,6 +110,10 @@ st.sidebar.info(
     )
 uploaded_files = st.file_uploader('Upload your files',accept_multiple_files=False, type=['xslx', 'xlsm', 'xls','csv'])
 
+if uploaded_files is not None:
+    EqList = pd.ExcelFile(uploaded_files)  
+    sheet_name = st.selectbox("Select the worksheet", EqList.sheet_names)
+
 if st.button("Get PoE"):
 
     # Ensure df_EqList is a DataFrame
@@ -118,11 +122,7 @@ if st.button("Get PoE"):
  
     # Load data from the uploaded file
     if uploaded_files is not None:
-        EqList = pd.ExcelFile(uploaded_files)
-        
-        sheet_name = st.selectbox("Select the worksheet", EqList.sheet_names)
         df_EqList = pd.read_excel(EqList, sheet_name)
-
         #df_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
 
         #Drop NaN 
