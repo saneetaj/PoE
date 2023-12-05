@@ -121,10 +121,15 @@ if st.button("Get PoE"):
  
     # Load data from the uploaded file
     if uploaded_files is not None:
-        df_EqList = pd.read_excel(EqList, sheet_name)
+        df_EqList = pd.read_excel(EqList, sheet_name, usecols=range(7))
         #df_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
+       
+        # Define your new column names
+        new_column_names = ['REV', 'TAG', 'SERVICE', 'PARENT TAG NUMBER', 'REQUISITION NUMBER', 
+                    'REQUISITION DESIGNATION', 'MATERIAL CODE']
+        
         st.write("Column names in the DataFrame:", df_EqList.columns.tolist())
-
+        
         #Drop NaN 
         df_EqList.dropna(subset=['TAG'], inplace=True)
 
