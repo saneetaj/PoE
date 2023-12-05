@@ -144,15 +144,19 @@ if st.button("Get PoE"):
     if 'df_EqList' not in locals() or not isinstance(df_EqList, pd.DataFrame):
         df_EqList = pd.DataFrame()
 
+    
     # Load data from the uploaded file
     if uploaded_files is not None:
         try:
             EqList = pd.ExcelFile(uploaded_files)
             read_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
-
+            st.write(type(read_EqList))  #debug       
             # Ensure read_EqList is a DataFrame
+            
             if isinstance(read_EqList, pd.DataFrame):
+                df_EqList = pd.DataFrame()  # Re-initialize to ensure it's a DataFrame
                 df_EqList = df_EqList.append(read_EqList, ignore_index=True)
+                st.write(df_EqList.head())  # Debugging print
                 #Drop the rows that are struck through
                 df_EqList.drop(strikethrough_rows, axis=0, inplace=True, errors='ignore')
                 #remove spaces from column titles
