@@ -55,7 +55,7 @@ def PoE(dataframe):
         dataframe['REQUISITIONDESIGNATION'].str.lower().str.contains('air cooler|aircooler|air-cooled|air cooled')
     )
     air_cooler_df = dataframe[air_cooler_conditions]
-    st.write(f"Air Coolers:{air_cooler_df['TAG']}")
+    #st.write(f"Air Coolers:{air_cooler_df['TAG']}")
     # Apply count_items to the subset
     air_cooler_counter, air_cooler_indices = count_items(air_cooler_df)
 
@@ -130,7 +130,7 @@ if st.button("Get PoE"):
         #after converting the number in MaterialCode to string a decimal/period is added to the string. Remove that decimal/period.
         df_EqList['MATERIALCODE'] = df_EqList['MATERIALCODE'].astype(str).apply(lambda x: x.split('.')[0])
 
-        df_EqList['REQUISITIONDESIGNATION'] = str(df_EqList['REQUISITIONDESIGNATION'])
+        #df_EqList['REQUISITIONDESIGNATION'] = str(df_EqList['REQUISITIONDESIGNATION'])
         
         line_counts, line_indices = count_items(df_EqList)
         EqList_Total = 0
