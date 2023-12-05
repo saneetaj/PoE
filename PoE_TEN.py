@@ -16,7 +16,7 @@
 #!pip install -q streamlit
 #!pip install streamlit --q
 
-!pip install openpyxl
+pip install openpyxl
 import streamlit as st
 import pandas as pd
 import warnings
