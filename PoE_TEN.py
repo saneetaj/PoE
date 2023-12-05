@@ -179,6 +179,8 @@ if st.button("Get PoE"):
                     #print(f"{item}: {count}, Indices: {item_indices[item]}")
                     PoE_Total += count
                 PoE_Total=math.ceil(PoE_Total)
+                
+                st.write(f"Total Equipment/ Line Items (not POE):\n {EqList_Total}, **Total PoE**: {PoE_Total}")
             else:
                 print("read_EqList is not a DataFrame.")
         except Exception as e:
@@ -191,7 +193,6 @@ if st.button("Get PoE"):
     #read_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
     #df_EqList = df_EqList.append(read_EqList)
     
-    st.write(f"Total Equipment/ Line Items (not POE):\n {EqList_Total}, **Total PoE**: {PoE_Total}")
 
 
 # In[ ]:
