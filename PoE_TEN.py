@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-pip install --upgrade pandas
+#pip install --upgrade pandas
 # ## Importing Libraries
 import streamlit as st
 import pandas as pd
