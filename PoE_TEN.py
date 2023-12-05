@@ -140,10 +140,21 @@ uploaded_files = st.file_uploader('Upload your files',accept_multiple_files=Fals
 if st.button("Get PoE"):
     strikethrough_rows = get_strikethrough_rows_in_column(uploaded_files, 'EQUIPMENT LIST','TAG')
     #df_EqList=pd.read_csv('drive/My Drive/Colab Notebooks/ECA.csv')
-    df_EqList = pd.DataFrame()
-    EqList=pd.ExcelFile(uploaded_files)
+    # ... (previous code)
+
+# Initialize df_EqList as an empty DataFrame if it's not already defined
+    if 'df_EqList' not in locals():
+        df_EqList = pd.DataFrame()
+    EqList = pd.ExcelFile(uploaded_files)
     read_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
-    df_EqList = df_EqList.append(read_EqList)
+    # Append read_EqList to df_EqList
+    df_EqList = df_EqList.append(read_EqList, ignore_index=True)
+
+    #df_EqList = pd.DataFrame()
+    #EqList=pd.ExcelFile(uploaded_files)
+    #read_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
+    #df_EqList = df_EqList.append(read_EqList)
+    
     #Drop the rows that are struck through
     df_EqList.drop(strikethrough_rows, axis=0, inplace=True, errors='ignore')
     #remove spaces from column titles
