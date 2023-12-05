@@ -146,39 +146,42 @@ if st.button("Get PoE"):
  
     # Load data from the uploaded file
     if uploaded_files is not None:
-        try:
-            EqList = pd.ExcelFile(uploaded_files)
-            #df_EqList = pd.DataFrame()  # Re-initialize to ensure it's a DataFrame
-            df_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
-            #df_EqList = df_EqList.append(read_EqList, ignore_index=True)
-            #Drop the rows that are struck through
-            df_EqList.drop(strikethrough_rows, axis=0, inplace=True, errors='ignore')
-            #remove spaces from column titles
-            df_EqList.columns=[col.replace(" ","")for col in df_EqList.columns]
-            #remove NaN from PoE
-            df_EqList.dropna(subset=['PoE'], inplace=True)
-            #convert PoE to integers
-            df_EqList['PoE'] = pd.to_numeric(df_EqList['PoE'], errors='coerce')
-            #if there are still some NaN or NA entries in PoE replace them with 0
-            df_EqList['PoE'].fillna(0, inplace=True)
-            #after converting the number in MaterialCode to string a decimal/period is added to the string. Remove that decimal/period.
-            df_EqList['MATERIALCODE'] = df_EqList['MATERIALCODE'].astype(str).apply(lambda x: x.split('.')[0])
+        EqList = pd.ExcelFile(uploaded_files)
+        df_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
+            
+        #Drop the rows that are struck through
+        df_EqList.drop(strikethrough_rows, axis=0, inplace=True, errors='ignore')
+            
+        #remove spaces from column titles
+        df_EqList.columns=[col.replace(" ","")for col in df_EqList.columns]
+            
+        #remove NaN from PoE
+        df_EqList.dropna(subset=['PoE'], inplace=True)
+            
+        #convert PoE to integers
+        df_EqList['PoE'] = pd.to_numeric(df_EqList['PoE'], errors='coerce')
+            
+        #if there are still some NaN or NA entries in PoE replace them with 0
+        df_EqList['PoE'].fillna(0, inplace=True)
+            
+        #after converting the number in MaterialCode to string a decimal/period is added to the string. Remove that decimal/period.
+        df_EqList['MATERIALCODE'] = df_EqList['MATERIALCODE'].astype(str).apply(lambda x: x.split('.')[0])
     
-            line_counts, line_indices = count_items(df_EqList)
-            EqList_Total = 0
-            # Printing the counts and indices
-            for item, count in line_counts.items():
-                EqList_Total += count
+        line_counts, line_indices = count_items(df_EqList)
+        EqList_Total = 0
+        # Printing the counts and indices
+        for item, count in line_counts.items():
+            EqList_Total += count
     
-            POE_counts, POE_indices = PoE(df_EqList)
-            PoE_Total = 0
-            # Printing the counts and indices
-            for item, count in POE_counts.items():
-                #print(f"{item}: {count}, Indices: {item_indices[item]}")
-                PoE_Total += count
-            PoE_Total=math.ceil(PoE_Total)
+        POE_counts, POE_indices = PoE(df_EqList)
+        PoE_Total = 0
+        # Printing the counts and indices
+        for item, count in POE_counts.items():
+            #print(f"{item}: {count}, Indices: {item_indices[item]}")
+            PoE_Total += count
+        PoE_Total=math.ceil(PoE_Total)
                 
-            st.write(f"Total Equipment/ Line Items (not POE):\n {EqList_Total}, **Total PoE**: {PoE_Total}")
+        st.write(f"Total Equipment/ Line Items (not POE):\n {EqList_Total}, **Total PoE**: {PoE_Total}")
 
 # In[ ]:
 
