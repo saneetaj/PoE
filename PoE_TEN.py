@@ -86,7 +86,7 @@ def PoE(dataframe):
                     increment = 2
                 elif row['MATERIALCODE'] == '1011' and 'turbine' in row['REQUISITIONDESIGNATION'].lower():
                     increment = 3
-                elif row['MATERIALCODE'] == '0140' or '140' and 'thermal oxidizer' in row['REQUISITIONDESIGNATION'].lower():
+                elif row['MATERIALCODE'] == '0140' or '140' and any (term in row['REQUISITION DESIGNATION'].lower for term in ['thermal oxidizer','oxidizer']):
                     increment = 3
                 elif row['MATERIALCODE'] in packaged_eq:
                     increment = 1.2
