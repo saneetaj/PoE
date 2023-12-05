@@ -10,7 +10,7 @@
 # 
 # 
 
-# In[19]:
+# In[24]:
 
 
 #!pip install -q streamlit
@@ -25,7 +25,7 @@ from collections import defaultdict
 warnings.filterwarnings('ignore')
 
 
-# In[20]:
+# In[25]:
 
 
 from openpyxl import load_workbook
@@ -57,33 +57,8 @@ def get_strikethrough_rows_in_column(file_name, sheet_name, column_name):
 
     return struck_rows
 
-# Replace 'your_column_name' with the name of the column you want to check
-strikethrough_rows = get_strikethrough_rows_in_column('ECA.xlsm', 'EQUIPMENT LIST','TAG')
 
-
-# In[21]:
-
-
-#df_EqList=pd.read_csv('drive/My Drive/Colab Notebooks/ECA.csv')
-df_EqList = pd.DataFrame()
-EqList=pd.ExcelFile('ECA.xlsm')
-read_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
-df_EqList = df_EqList.append(read_EqList)
-# Drop the rows that are struck through
-df_EqList.drop(strikethrough_rows, axis=0, inplace=True, errors='ignore')
-#remove spaces from column titles
-df_EqList.columns=[col.replace(" ","")for col in df_EqList.columns]
-#remove NaN from PoE
-df_EqList.dropna(subset=['PoE'], inplace=True)
-#convert PoE to integers
-df_EqList['PoE'] = pd.to_numeric(df_EqList['PoE'], errors='coerce')
-#if there are still some NaN or NA entries in PoE replace them with 0
-df_EqList['PoE'].fillna(0, inplace=True)
-#aftter converting the number in MaterialCode to string a decimal/period is added to the string. Remove that decimal/period.
-df_EqList['MATERIALCODE'] = df_EqList['MATERIALCODE'].astype(str).apply(lambda x: x.split('.')[0])
-
-
-# In[22]:
+# In[26]:
 
 
 #function to count total line items in the Equipment list
@@ -114,19 +89,8 @@ def count_items(dataframe):
             item_indices[base_item3].append(index)
     return item_counter, item_indices
 
-# Assuming df_POE is your DataFrame
-item_counts, item_indices = count_items(df_EqList)
 
-EqList_Total = 0
-# Printing the counts and indices
-for item, count in item_counts.items():
-    #print(f"{item}: {count}, Indices: {item_indices[item]}")
-    EqList_Total += count
-
-#print(f"Total Equipment/ Line Items (not POE): {EqList_Total}")
-
-
-# In[23]:
+# In[27]:
 
 
 def PoE(dataframe):
@@ -183,34 +147,8 @@ def PoE(dataframe):
 
     return item_counter, item_indices
 
-# Assuming item_counts and item_indices are obtained from the PoE function
-item_counts, item_indices = PoE(df_EqList)
 
-# Create a list of dictionaries, each representing a row in the DataFrame
-data = []
-for tag, count in item_counts.items():
-    data.append({
-        "Tag": tag,
-        "Count": count,
-        "Indices": item_indices[tag]
-    })
-
-# Convert the list of dictionaries to a DataFrame
-df_export = pd.DataFrame(data)
-
-# Write the DataFrame to a CSV file
-#df_export.to_csv(r'drive/My Drive/Colab Notebooks/POE_final.csv')
-
-PoE_Total = 0
-# Printing the counts and indices
-for item, count in item_counts.items():
-    #print(f"{item}: {count}, Indices: {item_indices[item]}")
-    PoE_Total += count
-PoE_Total=math.ceil(PoE_Total)
-#print(f"POE: {PoE_Total}")
-
-
-# In[17]:
+# In[28]:
 
 
 st.title("PoE Estimator")
@@ -221,7 +159,40 @@ st.sidebar.info(
 uploaded_files = st.file_uploader('Upload your files',accept_multiple_files=False, type=['xslx', 'xlsm', 'xls','csv'])
 
 if st.button("Get PoE"):
-  st.write(f"Total Equipment/ Line Items (not POE):\n {EqList_Total}, **Total PoE**: {PoE_Total}")
+    strikethrough_rows = get_strikethrough_rows_in_column(uploaded_files, 'EQUIPMENT LIST','TAG')
+    #df_EqList=pd.read_csv('drive/My Drive/Colab Notebooks/ECA.csv')
+    df_EqList = pd.DataFrame()
+    EqList=pd.ExcelFile(uploaded_files)
+    read_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
+    df_EqList = df_EqList.append(read_EqList)
+    #Drop the rows that are struck through
+    df_EqList.drop(strikethrough_rows, axis=0, inplace=True, errors='ignore')
+    #remove spaces from column titles
+    df_EqList.columns=[col.replace(" ","")for col in df_EqList.columns]
+    #remove NaN from PoE
+    df_EqList.dropna(subset=['PoE'], inplace=True)
+    #convert PoE to integers
+    df_EqList['PoE'] = pd.to_numeric(df_EqList['PoE'], errors='coerce')
+    #if there are still some NaN or NA entries in PoE replace them with 0
+    df_EqList['PoE'].fillna(0, inplace=True)
+    #after converting the number in MaterialCode to string a decimal/period is added to the string. Remove that decimal/period.
+    df_EqList['MATERIALCODE'] = df_EqList['MATERIALCODE'].astype(str).apply(lambda x: x.split('.')[0])
+    
+    line_counts, line_indices = count_items(df_EqList)
+    EqList_Total = 0
+    # Printing the counts and indices
+    for item, count in line_counts.items():
+        EqList_Total += count
+    
+    POE_counts, POE_indices = PoE(df_EqList)
+    PoE_Total = 0
+    # Printing the counts and indices
+    for item, count in POE_counts.items():
+        #print(f"{item}: {count}, Indices: {item_indices[item]}")
+        PoE_Total += count
+    PoE_Total=math.ceil(PoE_Total)
+    
+    st.write(f"Total Equipment/ Line Items (not POE):\n {EqList_Total}, **Total PoE**: {PoE_Total}")
 
 
 # In[ ]:
