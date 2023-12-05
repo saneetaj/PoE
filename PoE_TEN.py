@@ -154,15 +154,6 @@ if st.button("Get PoE"):
         #Drop the rows that are struck through
         df_EqList.drop(strikethrough_rows, axis=0, inplace=True, errors='ignore')
             
-        #remove NaN from PoE
-        df_EqList.dropna(subset=['PoE'], inplace=True)
-            
-        #convert PoE to integers
-        df_EqList['PoE'] = pd.to_numeric(df_EqList['PoE'], errors='coerce')
-            
-        #if there are still some NaN or NA entries in PoE replace them with 0
-        df_EqList['PoE'].fillna(0, inplace=True)
-            
         #after converting the number in MaterialCode to string a decimal/period is added to the string. Remove that decimal/period.
         df_EqList['MATERIALCODE'] = df_EqList['MATERIALCODE'].astype(str).apply(lambda x: x.split('.')[0])
     
