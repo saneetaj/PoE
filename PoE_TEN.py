@@ -1,21 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# 
-# 
-# ---
+
 # ## Importing Libraries
-# ---
-# 
-# 
-# 
-
-# In[24]:
-
-
-#!pip install -q streamlit
-#!pip install streamlit --q
-
 import streamlit as st
 import pandas as pd
 import warnings
@@ -26,7 +13,6 @@ from collections import defaultdict
 warnings.filterwarnings('ignore')
 
 from openpyxl import load_workbook
-
 #get the entries which have been struck out
 def get_strikethrough_rows_in_column(file_name, sheet_name, column_name):
     workbook = load_workbook(filename=file_name, data_only=True)
