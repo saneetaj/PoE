@@ -139,16 +139,26 @@ uploaded_files = st.file_uploader('Upload your files',accept_multiple_files=Fals
 
 if st.button("Get PoE"):
     strikethrough_rows = get_strikethrough_rows_in_column(uploaded_files, 'EQUIPMENT LIST','TAG')
-    #df_EqList=pd.read_csv('drive/My Drive/Colab Notebooks/ECA.csv')
-    # ... (previous code)
 
-# Initialize df_EqList as an empty DataFrame if it's not already defined
-    if 'df_EqList' not in locals():
+    # Ensure df_EqList is a DataFrame
+    if 'df_EqList' not in locals() or not isinstance(df_EqList, pd.DataFrame):
         df_EqList = pd.DataFrame()
-    EqList = pd.ExcelFile(uploaded_files)
-    read_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
-    # Append read_EqList to df_EqList
-    df_EqList = df_EqList.append(read_EqList, ignore_index=True)
+
+    # Load data from the uploaded file
+    if uploaded_files is not None:
+        try:
+            EqList = pd.ExcelFile(uploaded_files)
+            read_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
+
+            # Ensure read_EqList is a DataFrame
+            if isinstance(read_EqList, pd.DataFrame):
+                df_EqList = df_EqList.append(read_EqList, ignore_index=True)
+            else:
+                print("read_EqList is not a DataFrame.")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+    else:
+        print("No file uploaded.")
 
     #df_EqList = pd.DataFrame()
     #EqList=pd.ExcelFile(uploaded_files)
