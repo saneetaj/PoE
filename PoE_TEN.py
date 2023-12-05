@@ -122,7 +122,10 @@ if st.button("Get PoE"):
     if uploaded_files is not None:
         EqList = pd.ExcelFile(uploaded_files)
         df_EqList = pd.read_excel(EqList, 'EQUIPMENT LIST')
-        
+
+        #Drop NaN 
+        df_EqList.dropna(subset=['TAG'], inplace=True)
+
         #remove spaces from column titles
         df_EqList.columns=[col.replace(" ","")for col in df_EqList.columns]
             
