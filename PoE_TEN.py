@@ -111,8 +111,13 @@ st.sidebar.info(
     )
 uploaded_files = st.file_uploader('Upload the Equipment List Excel File',accept_multiple_files=False, type=['xslx', 'xlsm', 'xls','csv'])
 # Using "with" notation
+multi = '''(1)If you end a line with two spaces,
+a soft return is used for the next line.
+(2)Two (or more) newline characters in a row will result in a hard return.
+'''
+st.markdown(multi)
 with st.sidebar:
-    add_txt = st.text("Choose a shipping method")
+    add_markdown = st.markdown(multi)
     
 if uploaded_files is not None:
     EqList = pd.ExcelFile(uploaded_files)  
