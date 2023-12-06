@@ -111,9 +111,9 @@ st.sidebar.info(
     )
 uploaded_files = st.file_uploader('Upload the Equipment List Excel File',accept_multiple_files=False, type=['xslx', 'xlsm', 'xls','csv'])
 # Using "with" notation
-multi = '''(1)If you end a line with two spaces,
-a soft return is used for the next line.
-(2)Two (or more) newline characters in a row will result in a hard return.
+multi = '''
+- delete any empty rows above the column titles,
+- delete any rows with tags that are struck out i.e. deleted.
 '''
 st.markdown(multi)
 with st.sidebar:
