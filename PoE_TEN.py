@@ -112,10 +112,8 @@ st.sidebar.info(
 uploaded_files = st.file_uploader('Upload the Equipment List Excel File',accept_multiple_files=False, type=['xslx', 'xlsm', 'xls','csv'])
 # Using "with" notation
 with st.sidebar:
-    add_txt = st.text(
-        "Choose a shipping method",
-        ("Standard (5-15 days)", "Express (2-5 days)")
-    )
+    add_txt = st.text("Choose a shipping method")
+    
 if uploaded_files is not None:
     EqList = pd.ExcelFile(uploaded_files)  
     sheet_name = st.selectbox("Select the Equipment List Sheet", EqList.sheet_names)
