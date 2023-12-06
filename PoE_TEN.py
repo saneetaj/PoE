@@ -110,7 +110,12 @@ st.sidebar.info(
     '''Upload a **EQUIPMENT LIST** to find the Pieces of Equipment count. ***Make sure you delete any empty rows above the column titles, and any tags that are struck out i.e. deleted.***'''
     )
 uploaded_files = st.file_uploader('Upload the Equipment List Excel File',accept_multiple_files=False, type=['xslx', 'xlsm', 'xls','csv'])
-
+# Using "with" notation
+with st.sidebar:
+    add_txt = st.text(
+        "Choose a shipping method",
+        ("Standard (5-15 days)", "Express (2-5 days)")
+    )
 if uploaded_files is not None:
     EqList = pd.ExcelFile(uploaded_files)  
     sheet_name = st.selectbox("Select the Equipment List Sheet", EqList.sheet_names)
