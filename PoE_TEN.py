@@ -157,7 +157,7 @@ if st.button("Get PoE"):
         PoE_Total = 0
         # Printing the counts and indices
         for item, count in POE_counts.items():
-            #st.write(f"{item}: {count}")
+            st.write(f"{item}: {count}")
             PoE_Total += count
         PoE_Total=math.ceil(PoE_Total)
                 
