@@ -105,7 +105,7 @@ def PoE(dataframe):
 st.title("PoE Estimator")
 st.sidebar.header("Instructions")
 st.sidebar.info(
-    '''Upload a **EQUIPMENT LIST** to find the Pieces of Equipment. ***Make sure you delete any empty rows above the column titles, and any tags that are struck out.***'''
+    '''Upload a **EQUIPMENT LIST** to find the Pieces of Equipment count. ***Make sure you delete any empty rows above the column titles, and any tags that are struck out.***'''
     )
 uploaded_files = st.file_uploader('Upload the Equipment List Excel File',accept_multiple_files=False, type=['xslx', 'xlsm', 'xls','csv'])
 
