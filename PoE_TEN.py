@@ -112,11 +112,11 @@ st.sidebar.info(
 uploaded_files = st.file_uploader('Upload the Equipment List Excel File',accept_multiple_files=False, type=['xslx', 'xlsm', 'xls','csv'])
 # Using "with" notation
 multi = '''
-- delete any empty rows above the column titles,
-- delete any rows with tags that are struck out i.e. deleted.
+:blue[- delete any empty rows above the column titles,
+- delete any rows with tags that are struck out i.e. deleted.]
 '''
 with st.sidebar:
-    add_markdown = st.markdown(:blue[multi])
+    add_markdown = st.markdown(multi)
     
 if uploaded_files is not None:
     EqList = pd.ExcelFile(uploaded_files)  
