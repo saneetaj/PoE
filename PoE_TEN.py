@@ -112,9 +112,8 @@ st.sidebar.info(
 uploaded_files = st.file_uploader('Upload the Equipment List Excel File',accept_multiple_files=False, type=['xslx', 'xlsm', 'xls','csv'])
 # Using "with" notation
 multi = '''
-- delete any empty rows including those above column headers,
 - delete any rows with tags that are struck out i.e. deleted,
-- assign separate row for each Air Cooler bay, for example: H3-1201A and H3-1201B will be separate rows with H3-1201 as PARENT TAG.
+- assign separate row for each Air Cooler bay, for example: H3-1201A and H3-1201B should be separate rows with H3-1201 as PARENT TAG.
 '''
 with st.sidebar:
     add_markdown = st.markdown(multi)
