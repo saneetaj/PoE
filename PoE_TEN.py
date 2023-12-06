@@ -112,7 +112,7 @@ st.sidebar.info(
 uploaded_files = st.file_uploader('Upload the Equipment List Excel File',accept_multiple_files=False, type=['xslx', 'xlsm', 'xls','csv'])
 # Using "with" notation
 multi = '''
-- delete any empty rows above the column titles,
+- delete any empty rows including those above column headers,
 - delete any rows with tags that are struck out i.e. deleted.
 '''
 with st.sidebar:
