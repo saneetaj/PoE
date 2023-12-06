@@ -109,9 +109,11 @@ st.sidebar.header("Instructions")
 st.sidebar.info(
     '''Upload a **EQUIPMENT LIST** to find the Pieces of Equipment ***(PoE)*** count.'''
     )
-uploaded_files = st.file_uploader('Upload the Equipment List Excel File',accept_multiple_files=False, type=['xslx', 'xlsm', 'xls','csv'])
+uploaded_files = st.file_uploader('Upload the Equipment List Excel File',accept_multiple_files=False, type=['xslx', 'xlsm', 'xls'])
 # Using "with" notation
 multi = '''
+- ensure that first 7 columns are in this order: **'REV', 'TAG', 'SERVICE', 'PARENT TAG NUMBER', 'REQUISITION NUMBER', 'REQUISITION DESIGNATION', 'MATERIAL CODE'**
+- ensure that the **'TAG', 'PARENT TAG NUMBER', 'REQUISITION DESIGNATION', 'MATERIAL CODE'** columns are populated and not empty.
 - delete any rows with tags that are struck out i.e. deleted,
 - assign separate row for each Air Cooler bay, for example: H3-1201A and H3-1201B should be separate rows with H3-1201 as PARENT TAG.
 '''
