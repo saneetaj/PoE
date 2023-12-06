@@ -107,13 +107,13 @@ def PoE(dataframe):
 st.title("PoE Estimator")
 st.sidebar.header("Instructions")
 st.sidebar.info(
-    '''Upload a **EQUIPMENT LIST** to find the Pieces of Equipment count.**'''
+    '''Upload a **EQUIPMENT LIST** to find the Pieces of Equipment count.'''
     )
 uploaded_files = st.file_uploader('Upload the Equipment List Excel File',accept_multiple_files=False, type=['xslx', 'xlsm', 'xls','csv'])
 # Using "with" notation
 multi = '''
-:blue[- delete any empty rows above the column titles,
-- delete any rows with tags that are struck out i.e. deleted.]
+- delete any empty rows above the column titles,
+- delete any rows with tags that are struck out i.e. deleted.
 '''
 with st.sidebar:
     add_markdown = st.markdown(multi)
