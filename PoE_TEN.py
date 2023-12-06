@@ -51,7 +51,7 @@ def PoE(dataframe):
 
     # Create a subset for air cooler related items
     air_cooler_conditions = (
-        dataframe['MATERIALCODE'].isin(['0710', '710']) &
+        dataframe['MATERIALCODE'].isin(['0710', '710']) |
         dataframe['REQUISITIONDESIGNATION'].str.lower().str.contains('air cooler|aircooler|air-cooled|air cooled')
     )
     air_cooler_df = dataframe[air_cooler_conditions]
